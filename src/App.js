@@ -1,28 +1,51 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { Layout, Menu, Icon } from 'antd';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+const { Header, Sider, Content } = Layout;
 
+const App = () => {
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggle = () => {
+    setCollapsed(!collapsed);
+  };
+
+  return (
+    <Layout className="page__container">
+      <Sider trigger={null} collapsible collapsed={collapsed}>
+        <div className="logo" />
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+          <Menu.Item key="1">
+            <Icon type="user" />
+            <span>nav 1</span>
+          </Menu.Item>
+          <Menu.Item key="2">
+            <Icon type="video-camera" />
+            <span>nav 2</span>
+          </Menu.Item>
+          <Menu.Item key="3">
+            <Icon type="upload" />
+            <span>nav 3</span>
+          </Menu.Item>
+        </Menu>
+      </Sider>
+      <Layout>
+        <Header style={{ background: '#fff', padding: 0 }}>
+          <Icon className="trigger" type={collapsed ? 'menu-unfold' : 'menu-fold'} onClick={toggle} />
+        </Header>
+        <Content
+          style={{
+            margin: '24px 16px',
+            padding: 24,
+            background: '#fff',
+            minHeight: 280
+          }}
+        >
+          Content
+        </Content>
+      </Layout>
+    </Layout>
+  );
+};
 export default App;
