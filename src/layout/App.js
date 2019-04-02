@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import { MENU_ITEMS } from '../config/menu-items.constant';
 import { Layout, Menu, Icon } from 'antd';
 
 const { Header, Sider, Content } = Layout;
@@ -15,19 +16,13 @@ const App = () => {
     <Layout className="page__container">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-          <Menu.Item key="1">
-            <Icon type="user" />
-            <span>nav 1</span>
-          </Menu.Item>
-          <Menu.Item key="2">
-            <Icon type="video-camera" />
-            <span>nav 2</span>
-          </Menu.Item>
-          <Menu.Item key="3">
-            <Icon type="upload" />
-            <span>nav 3</span>
-          </Menu.Item>
+        <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']}>
+          {MENU_ITEMS.map((item, index) => (
+            <Menu.Item key={index}>
+              <Icon type={item.icon} />
+              <span>{item.title}</span>
+            </Menu.Item>
+          ))}
         </Menu>
       </Sider>
       <Layout>
@@ -36,7 +31,7 @@ const App = () => {
         </Header>
         <Content
           style={{
-            margin: '24px 16px',
+            margin: '16px',
             padding: 24,
             background: '#fff',
             minHeight: 280
